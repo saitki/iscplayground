@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Concurso de Videojuegos - Halo y Minecraft</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>Concurso de Videojuegos</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#informacion">Información</a></li>
+                <li><a href="#registro">Registro</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="inicio" class="hero">
+        <div class="hero-container">
+            <h1>Demuestra tu poder <br><span class="highlight">en Halo y Minecraft</span></h1>
+            <p>Compite, crea y conquista. ¡Gana premios increíbles y sé el mejor!</p>
+            <a href="#registro" class="cta-button">¡INSCRÍBETE YA!</a>
+        </div>
+    </section>
+
+    <section id="informacion" class="info">
+        <h2>Sobre el Concurso</h2>
+        <div class="games">
+            <div class="game">
+                <img src="imagenes/halo.jpg" alt="Halo Logo">
+                <h3>*Halo*</h3>
+                <p>Compite en uno de los shooters más populares. ¡Demuestra tu destreza en la guerra espacial!</p>
+            </div>
+            <div class="game">
+                <img src="imagenes/minecraaft.jpg" alt="Minecraft Logo">
+                <h3>*Minecraft*</h3>
+                <p>Demuestra tu creatividad y habilidad para sobrevivir en el mundo de bloques.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="registro" class="registro">
+        <h2>Regístrate para el Concurso</h2>
+        <form>
+            <label for="nombre">Nombre Completo</label>
+            <input type="text" id="nombre" name="nombre" required>
+
+            <label for="email">Correo Electrónico</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="juego">Elige tu Juego</label>
+            <select id="juego" name="juego" required>
+                <option value="halo">Halo</option>
+                <option value="minecraft">Minecraft</option>
+            </select>
+
+            <button type="submit" class="submit-btn">Registrar</button>
+        </form>
+    </section>
+
+    <section id="contacto" class="contacto">
+        <h2>Contacto</h2>
+        <p>Si tienes alguna pregunta, no dudes en contactarnos a <a href="mailto:contacto@videojuegos.com">contacto@videojuegos.com</a>.</p>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Concurso de Videojuegos | Todos los derechos reservados</p>
+    </footer>
+</body>
+</html>

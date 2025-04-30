@@ -1,0 +1,218 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #1a1a1a;
+    color: #fff;
+}
+
+header {
+    background-color: #0a0a0a;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header .logo h1 {
+    font-size: 2rem;
+    color: #e5e5e5;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #e5e5e5;
+    font-size: 1rem;
+    transition: color 0.3s;
+}
+
+nav ul li a:hover {
+    color: #ff4500;
+}
+
+.hero {
+    background-image: url('imagenes/gaming.jpg'); 
+    background-size: cover;
+    background-position: center;
+    padding: 100px 20px;
+    color: #fff;
+    text-align: center;
+    position: relative;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1;
+}
+
+.hero-container {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.hero .highlight {
+    color: #ff4500;
+}
+
+.hero p {
+    font-size: 1.25rem;
+    margin-bottom: 30px;
+}
+
+.hero .cta-button {
+    padding: 12px 30px;
+    font-size: 1.2rem;
+    background-color: #ff4500;
+    border: none;
+    border-radius: 8px;
+    color: #fff;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.hero .cta-button:hover {
+    background-color: #e43e00;
+}
+
+.info {
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.info h2 {
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+}
+
+.games {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+    padding: 2rem 1rem;
+}
+
+.game {
+    background-color: #2a2a2a;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    width: 300px;
+    text-align: center;
+    padding: 1.5rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.game:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5);
+}
+
+.game img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    max-height: 200px;
+    object-fit: cover;
+}
+
+.game h3 {
+    margin-top: 1rem;
+    font-size: 1.5rem;
+    color: #ff4500;
+}
+
+.game p {
+    margin-top: 0.5rem;
+    color: #ccc;
+    font-size: 1rem;
+}
+
+.registro {
+    padding: 40px 20px;
+    background-color: #333;
+    text-align: center;
+}
+
+.registro h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.registro form {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.registro label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 1rem;
+}
+
+.registro input,
+.registro select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+}
+
+.registro .submit-btn {
+    padding: 10px 20px;
+    background-color: #ff4500;
+    color: #fff;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.registro .submit-btn:hover {
+    background-color: #e43e00;
+}
+
+.contacto {
+    padding: 40px 20px;
+    background-color: #1a1a1a;
+    text-align: center;
+}
+
+.contacto a {
+    color: #ff4500;
+    text-decoration: none;
+}
+
+footer {
+    background-color: #0a0a0a;
+    text-align: center;
+    padding: 20px;
+    color: #e5e5e5;
+}
+
+footer p {
+    font-size: 1rem;
+}
