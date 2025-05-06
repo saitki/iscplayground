@@ -1,0 +1,15 @@
+dn: uid=diegoamanecer,ou=itsfcp,dc=iscplayground,dc=local
+objectClass: top
+objectClass: posixAccount
+objectClass: inetOrgPerson
+cn: Diego Amanecer Morales Mena
+uid: diegoamanecer
+ou: itsfcp
+uidNumber: 2001
+gidNumber: 11000
+homeDirectory: /home/diegoamanecer
+loginShell: /bin/bash
+userPassword: 1234
+sn: Morales Mena
+mail: diegoamanecer@gmail.com
+givenName: Diego Amanecer

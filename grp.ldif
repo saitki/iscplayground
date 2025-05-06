@@ -1,0 +1,5 @@
+dn: cn=playgrounds,ou=itsfcp,dc=iscplayground,dc=local
+objectClass: top
+objectClass: posixGroup
+gidNumber: 11000
+cn: playgrounds

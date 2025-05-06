@@ -1,0 +1,16 @@
+dn: uid=saikioki,ou=itsfcp,dc=iscplayground,dc=local
+objectClass: top
+objectClass: posixAccount
+objectClass: inetOrgPerson
+cn: Alejandro Lenier Ireta Xiu
+uid: saikioki
+ou: itsfcp
+uidNumber: 2000
+gidNumber: 11000
+homeDirectory: /home/saikioki
+loginShell: /bin/bash
+userPassword: 1234
+sn: Ireta Xiu 
+mail: airetaxiu@gmail.com
+givenName: Alejandro Lenier
+
