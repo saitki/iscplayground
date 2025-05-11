@@ -8,7 +8,7 @@ const userOrg = document.getElementById('userOrg');
 const connectionStatus = document.getElementById('connectionStatus');
 
 // Variables
-let currentUser = JSON.parse(localStorage.getItem('user')); // Cambiado de sessionStorage a localStorage para consistencia
+let currentUser = JSON.parse(sessionStorage.getItem('currentUser')); 
 const API_URL = window.location.origin; // Usar origen actual para flexibilidad
 let socket;
 
@@ -202,8 +202,8 @@ function scrollToBottom() {
  * Cerrar sesión
  */
 function logout() {
-  localStorage.removeItem('user');
-  window.location.href = '/index.html';
+    sessionStorage.removeItem('currentUser');
+    window.location.href = '/index.html';
 }
 
 /**

@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sistema de Chat</title>
   <meta name="theme-color" content="#4a69bd">
   <link rel="manifest" href="manifest.json">
@@ -62,7 +62,6 @@
     html {
       touch-action: manipulation;
       -webkit-text-size-adjust: 100%;
-      height: 100%;
     }
 
     body {
@@ -71,7 +70,7 @@
       color: var(--color-text);
       line-height: 1.5;
       transition: background-color var(--transition-medium), color var(--transition-medium);
-      height: 100%;
+      height: 100vh;
       display: flex;
       overflow: hidden;
       width: 100%;
@@ -186,7 +185,7 @@
 
     .user-details {
       flex-grow: 1;
-      min-width: 0;
+      min-width: 0; /* Importante para el texto truncado */
     }
 
     .username {
@@ -255,7 +254,7 @@
       display: flex;
       align-items: center;
       gap: var(--spacing-md);
-      min-width: 0;
+      min-width: 0; /* Para que el texto se pueda truncar */
     }
 
     .chat-title-container {
@@ -314,7 +313,7 @@
       flex-direction: column;
       gap: var(--spacing-md);
       background-color: var(--color-bg-light);
-      -webkit-overflow-scrolling: touch;
+      -webkit-overflow-scrolling: touch; /* Mejorar el desplazamiento en iOS */
     }
 
     .message {
@@ -366,15 +365,15 @@
       font-size: var(--font-size-xs);
       opacity: 0.6;
       margin-top: var(--spacing-xs);
-      text-align: right;
+      text-align: right; /* Alineación por defecto */
     }
 
     .message.incoming .message-time {
-      text-align: left;
+      text-align: left; /* Alineación para mensajes entrantes */
     }
 
     .message.outgoing .message-time {
-      text-align: right;
+      text-align: right; /* Alineación para mensajes salientes */
     }
 
     .message-content img {
@@ -411,12 +410,9 @@
     /* Formulario de mensajes */
     .message-form-container {
       padding: var(--spacing-lg);
-      padding-bottom: calc(var(--spacing-lg) + env(safe-area-inset-bottom));
       background-color: var(--color-light);
       border-top: 1px solid var(--color-gray-light);
       z-index: 5;
-      position: sticky;
-      bottom: 0;
     }
 
     .message-form {
@@ -461,7 +457,7 @@
       font-size: var(--font-size-md);
       outline: none;
       color: var(--color-text);
-      min-width: 0;
+      min-width: 0; /* Importante para evitar desbordamiento */
     }
 
     .message-actions {
@@ -643,14 +639,6 @@
       .toggle-sidebar {
         display: flex;
       }
-
-      /* Ajustes específicos para la barra de mensajes en móviles */
-      .message-form-container {
-        padding-bottom: calc(var(--spacing-lg) + env(safe-area-inset-bottom));
-      }
-
-      .messages-container {
-      }
     }
 
     /* Ajustes para pantallas muy pequeñas */
@@ -670,7 +658,6 @@
 
       .message-form-container {
         padding: var(--spacing-md);
-        padding-bottom: calc(var(--spacing-md) + env(safe-area-inset-bottom));
       }
       
       .chat-actions {
@@ -694,6 +681,7 @@
       }
       
       .messages-container {
+        padding-bottom: var(--spacing-xl);
       }
       
       .message-form {
@@ -767,24 +755,6 @@
       
       .attach-button:hover {
         background-color: rgba(255, 255, 255, 0.1);
-      }
-    }
-
-    /* Soporte para safe-area-inset en navegadores que lo admiten */
-    @supports (padding-bottom: env(safe-area-inset-bottom)) {
-      .message-form-container {
-        padding-bottom: calc(var(--spacing-lg) + env(safe-area-inset-bottom));
-      }
-      
-      body {
-        padding-bottom: env(safe-area-inset-bottom);
-      }
-    }
-
-    /* Fallback para navegadores sin soporte para safe-area-inset */
-    @supports not (padding-bottom: env(safe-area-inset-bottom)) {
-      .message-form-container {
-        padding-bottom: var(--spacing-lg);
       }
     }
   </style>
@@ -899,27 +869,172 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.1/socket.io.min.js"></script>
   <script>
-    // Script para controlar la barra lateral en dispositivos móviles
     document.addEventListener('DOMContentLoaded', function() {
+      // Referencias DOM
+      const sidebar = document.getElementById('sidebar');
       const toggleSidebar = document.getElementById('toggleSidebar');
-      const appContainer = document.querySelector('.app-container');
+      const sidebarOverlay = document.getElementById('sidebarOverlay');
+      const messageForm = document.getElementById('messageForm');
+      const messageInput = document.getElementById('messageInput');
+      const messagesContainer = document.getElementById('messagesContainer');
+      const connectionStatus = document.getElementById('connectionStatus');
+      const statusIndicator = connectionStatus.querySelector('.status-indicator');
+      const statusText = connectionStatus.querySelector('span:not(.status-indicator)');
       
+      // Función para detección de dispositivo
+      function isMobileDevice() {
+        return window.innerWidth <= 768;
+      }
+      
+      // Control de la barra lateral
       toggleSidebar.addEventListener('click', function() {
-        appContainer.classList.toggle('sidebar-hidden');
-      });
-    });
-        toggleSidebar.addEventListener('click', function() {
         sidebar.classList.toggle('expanded');
-        sidebarOverlay.classList.toggle('active');
+        
+        if (sidebar.classList.contains('expanded') && isMobileDevice()) {
+          sidebarOverlay.classList.add('active');
+        }
       });
       
+      // Cerrar la barra lateral al hacer clic en el overlay
       sidebarOverlay.addEventListener('click', function() {
         sidebar.classList.remove('expanded');
         sidebarOverlay.classList.remove('active');
       });
-
-    // Tu script de chat.js se cargará aquí o como archivo externo
-  </script>
-  <script src="chat.js"></script>
-</body>
-</html>
+      
+      // Adaptar la interfaz al cambiar el tamaño de la ventana
+      window.addEventListener('resize', function() {
+        if (!isMobileDevice() && sidebarOverlay.classList.contains('active')) {
+          sidebarOverlay.classList.remove('active');
+        }
+        
+        if (!isMobileDevice() && sidebar.classList.contains('expanded')) {
+          sidebar.classList.remove('expanded');
+        }
+      });
+      
+      // Simulación de conexión websocket (para demostración)
+      setTimeout(function() {
+        statusIndicator.classList.remove('disconnected');
+        statusIndicator.classList.add('connected');
+        statusText.textContent = 'Conectado';
+      }, 2000);
+      
+      // Simulación de mensajes (para demostración)
+      function addMessage(text, isOutgoing = false, sender = '') {
+        // Eliminar el mensaje de "vacío" si existe
+        const emptyMessage = messagesContainer.querySelector('.empty-messages');
+        if (emptyMessage) {
+          emptyMessage.remove();
+        }
+        
+        // Crear el mensaje usando el template
+        const template = document.getElementById('messageTemplate');
+        const messageElement = template.content.cloneNode(true).querySelector('.message');
+        
+        // Configurar la clase según el tipo de mensaje
+        messageElement.classList.add(isOutgoing ? 'outgoing' : 'incoming');
+        
+        // Configurar el contenido
+        const senderElement = messageElement.querySelector('.message-sender');
+        const contentElement = messageElement.querySelector('.message-content');
+        const timeElement = messageElement.querySelector('.message-time');
+        
+        // Mostrar el remitente solo si se proporciona
+        if (sender) {
+          senderElement.textContent = sender;
+        } else {
+          senderElement.style.display = 'none';
+        }
+        
+        contentElement.textContent = text;
+        
+        // Añadir hora actual
+        const now = new Date();
+        const timeStr = now.getHours().toString().padStart(2, '0') + ':' + 
+                        now.getMinutes().toString().padStart(2, '0');
+        timeElement.textContent = timeStr;
+        
+        // Añadir al contenedor
+        messagesContainer.appendChild(messageElement);
+        
+        // Scroll al final
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        
+        return messageElement;
+      }
+      
+      // Mostrar indicador de escritura
+      function showTypingIndicator() {
+        const template = document.getElementById('typingTemplate');
+        const indicator = template.content.cloneNode(true);
+        messagesContainer.appendChild(indicator);
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        return messagesContainer.querySelector('.typing-indicator');
+      }
+      
+      // Ocultar indicador de escritura
+      function hideTypingIndicator(indicator) {
+        if (indicator && indicator.parentNode) {
+          indicator.parentNode.removeChild(indicator);
+        }
+      }
+      
+      // Manejo del envío de mensajes
+      messageForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const text = messageInput.value.trim();
+        if (!text) return;
+        
+        // Añadir mensaje del usuario
+        addMessage(text, true);
+        
+        // Limpiar el input
+        messageInput.value = '';
+        
+        // Simular respuesta (para demostración)
+        const typingIndicator = showTypingIndicator();
+        
+        setTimeout(function() {
+          hideTypingIndicator(typingIndicator);
+          
+          // Respuesta simulada
+          if (text.toLowerCase().includes('hola')) {
+            addMessage('¡Hola! ¿En qué puedo ayudarte hoy?', false, 'Asistente');
+          } else if (text.toLowerCase().includes('ayuda')) {
+            addMessage('Estoy aquí para ayudarte. ¿Qué necesitas?', false, 'Asistente');
+          } else {
+            addMessage('Gracias por tu mensaje. Un agente te responderá pronto.', false, 'Sistema');
+          }
+        }, 1500);
+      });
+      
+      // Simulación de mensajes iniciales (solo para demostración)
+      setTimeout(function() {
+        addMessage('¡Bienvenido al sistema de chat! ¿En qué podemos ayudarte hoy?', false, 'Sistema');
+      }, 1000);
+      
+      // Funciones de accesibilidad
+      function handleTabKey(e) {
+        if (e.key === 'Tab') {
+          document.body.classList.add('keyboard-user');
+        }
+      }
+      
+      function handleMouseDown() {
+        document.body.classList.remove('keyboard-user');
+      }
+      
+      // Añadir listeners para mejorar accesibilidad
+      document.addEventListener('keydown', handleTabKey);
+      document.addEventListener('mousedown', handleMouseDown);
+      
+      // Función para cerrar sesión (simulación)
+      window.logout = function() {
+        if (confirm('¿Estás seguro de que deseas cerrar sesión?')) {
+          alert('Sesión cerrada correctamente');
+          // Aquí iría el código real para cerrar sesión
+        }
+      };
+    });
+    </script>
