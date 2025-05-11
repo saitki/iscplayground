@@ -13,8 +13,13 @@
   "dependencies": {
     "body-parser": "^2.2.0",
     "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
     "express": "^5.1.0",
     "ldapjs": "^3.0.7",
-    "package.json": "^2.0.1"
+    "mongoose": "^8.14.2",
+    "mysql2": "^3.14.1",
+    "package.json": "^2.0.1",
+    "socket.io": "^4.8.1",
+    "socket.io-client": "^4.8.1"
   }
 }
