@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sistema de Chat - Login</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    body {
+      background-color: #f0f2f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    
+    .login-container {
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 400px;
+      padding: 30px;
+    }
+    
+    .login-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    
+    .login-header h1 {
+      color: #4a69bd;
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+    
+    .login-header p {
+      color: #666;
+      font-size: 14px;
+    }
+    
+    .input-group {
+      margin-bottom: 20px;
+    }
+    
+    .input-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+      color: #333;
+    }
+    
+    .input-group input {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 15px;
+      transition: border-color 0.3s;
+    }
+    
+    .input-group input:focus {
+      border-color: #4a69bd;
+      outline: none;
+    }
+    
+    .login-button {
+      width: 100%;
+      background-color: #4a69bd;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 12px;
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    
+    .login-button:hover {
+      background-color: #3a5bbf;
+    }
+    
+    .login-button:active {
+      transform: scale(0.98);
+    }
+    
+    #message {
+      margin-top: 20px;
+      padding: 10px;
+      border-radius: 4px;
+      text-align: center;
+      font-size: 14px;
+    }
+    
+    .error-message {
+      background-color: #ffebee;
+      color: #d32f2f;
+    }
+    
+    .success-message {
+      background-color: #e8f5e9;
+      color: #388e3c;
+    }
+    
+    .loading {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid rgba(255,255,255,.3);
+      border-radius: 50%;
+      border-top-color: white;
+      animation: spin 1s ease-in-out infinite;
+      margin-left: 10px;
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    
+    .loading-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <div class="login-header">
+      <h1>Sistema de Chat</h1>
+      <p>Inicia sesión para acceder al chat en tiempo real</p>
+    </div>
+    
+    <form id="loginForm">
+      <div class="input-group">
+        <label for="username">Usuario</label>
+        <input 
+          id="username" 
+          type="text" 
+          placeholder="Ingresa tu nombre de usuario" 
+          autocomplete="username"
+          required 
+        />
+      </div>
+      
+      <div class="input-group">
+        <label for="password">Contraseña</label>
+        <input 
+          id="password" 
+          type="password" 
+          placeholder="Ingresa tu contraseña" 
+          autocomplete="current-password"
+          required 
+        />
+      </div>
+      
+      <button type="submit" id="loginButton" class="login-button">
+        Iniciar Sesión
+      </button>
+    </form>
+    
+    <div id="message" style="display: none;"></div>
+  </div>
+  
+  <script src="main.js"></script>
+</body>
+</html>

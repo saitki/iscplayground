@@ -14,7 +14,7 @@ let socket;
 
 // Comprobar si hay usuario
 if (!currentUser) {
-  window.location.href = '/index.html';
+  window.location.href = '/login.html';
 } else {
   // Cargar datos del usuario
   userDisplayName.textContent = currentUser.username;

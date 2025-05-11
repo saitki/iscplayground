@@ -117,7 +117,7 @@ function setLoading(isLoading) {
 function checkSession() {
   const savedUser = sessionStorage.getItem('currentUser');
   
-  if (savedUser && window.location.pathname.includes('index.html')) {
+  if (savedUser && window.location.pathname.includes('login.html')) {
     // Si ya hay una sesión y estamos en la página de login, redirigir al chat
     window.location.href = 'chat.html';
   } else if (!savedUser && window.location.pathname.includes('chat.html')) {
